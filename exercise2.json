@@ -1,0 +1,64 @@
+[
+  {
+    "name": "Users",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["username", "email", "password_hash", "created_at"],
+        "properties": {
+          "_id": { "bsonType": "objectId" },
+          "username": { "bsonType": "string", "description": "unique username" },
+          "email": { "bsonType": "string", "description": "unique email address" },
+          "password_hash": { "bsonType": "string" },
+          "created_at": { "bsonType": "date" }
+        }
+      }
+    }
+  },
+  {
+    "name": "Posts",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["user_id", "content", "created_at"],
+        "properties": {
+          "_id": { "bsonType": "objectId" },
+          "user_id": { "bsonType": "objectId", "description": "reference to Users collection" },
+          "content": { "bsonType": "string" },
+          "created_at": { "bsonType": "date" }
+        }
+      }
+    }
+  },
+  {
+    "name": "Comments",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["post_id", "user_id", "content", "created_at"],
+        "properties": {
+          "_id": { "bsonType": "objectId" },
+          "post_id": { "bsonType": "objectId", "description": "reference to Posts collection" },
+          "user_id": { "bsonType": "objectId", "description": "reference to Users collection" },
+          "content": { "bsonType": "string" },
+          "created_at": { "bsonType": "date" }
+        }
+      }
+    }
+  },
+  {
+    "name": "Likes",
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["user_id", "post_id", "created_at"],
+        "properties": {
+          "_id": { "bsonType": "objectId" },
+          "user_id": { "bsonType": "objectId", "description": "reference to Users collection" },
+          "post_id": { "bsonType": "objectId", "description": "reference to Posts collection" },
+          "created_at": { "bsonType": "date" }
+        }
+      }
+    }
+  }
+]
